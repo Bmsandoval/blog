@@ -12,7 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $items_available = [
+        'consumables',
+        'crafts',
+    ];
+    return view('welcome',[
+        'items' => $items_available,
+    ]);
 });
 
 Route::get('/about', function () {

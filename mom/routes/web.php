@@ -15,6 +15,9 @@ Route::get('/items', 'ItemsController@index');
 
 Route::get('/items/{item}', 'ItemsController@show');
 
+Route::get('/posts', 'PostsController@index');
+
+Route::get('/posts/{post}', 'PostsController@show');
 Route::get('/', function () {
     $items = DB::table('items')->get();
     return view('welcome',[

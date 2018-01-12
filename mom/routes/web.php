@@ -11,16 +11,17 @@
 |
 */
 
+Route::get('/items', 'ItemsController@index');
+
+Route::get('/items/{item}', 'ItemsController@show');
+
 Route::get('/', function () {
-    $items_available = [
-        'consumables',
-        'crafts',
-    ];
+    $items = DB::table('items')->get();
     return view('welcome',[
-        'items' => $items_available,
+        'items' => $items,
     ]);
 });
 
-Route::get('/about', function () {
-    return view('about');
-});
+
+
+

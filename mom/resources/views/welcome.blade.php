@@ -4,9 +4,6 @@
 	<title></title>
     </head>
     <body>
-	<h1>Hello World</h1>
-    @foreach ($items as $item)
-        <li>{{ $item }}</li>
-    @endforeach
+	<h1>Welcome</h1>
     </body>
 </html>

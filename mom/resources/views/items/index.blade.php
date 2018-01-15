@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('items')
 
 @section('content')
     <main role="main">

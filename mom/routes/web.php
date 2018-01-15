@@ -18,12 +18,15 @@ Route::get('/items/{item}', 'ItemsController@show');
 Route::get('/posts', 'PostsController@index');
 
 Route::get('/posts/{post}', 'PostsController@show');
-Route::get('/', function () {
-    $items = DB::table('items')->get();
-    return view('welcome',[
-        'items' => $items,
-    ]);
-});
+
+/*Route::get('/posts/create', 'PostsController@create');*/
+Route::get('/create', 'PostsController@create');
+
+Route::post('/posts', 'PostsController@store');
+
+Route::view('/about', 'main.about');
+
+Route::view('/', 'main.cover');
 
 
 

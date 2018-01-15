@@ -18,8 +18,8 @@ class PostsController extends Controller
         $posts = Post::all();
         return view('posts.index',[
             'posts' => $posts,
-            'firstpost' => Post::first()->get(),
-            'lastpost' => Post::last()->get(),
+            'first_post' => Post::first()->get()[0],
+            'last_post' => Post::last()->get()[0],
         ]);
     }
 
@@ -30,6 +30,7 @@ class PostsController extends Controller
      */
     public function create()
     {
+        return view('posts.create');
         //
     }
 
@@ -41,7 +42,19 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'title'=>'required|string',
+            'body'=>'required|string',
+        ]);
+        $post = new Post;
+
+        $post->title = request('title');
+        $post->description = request('synopsis');
+        $post->article = request('body');
+
+        $post->save();
+
+        return redirect('/posts/'.$post->id);
     }
 
     /**

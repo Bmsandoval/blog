@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <script src="https://use.fontawesome.com/5ca3a5c3b0.js"></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -24,12 +25,12 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-sm-7 offset-sm-1 blog-content">
+                <div class="{{--col-sm-7 offset-sm-1--}} blog-content">
                     @yield('content')
                 </div>
-                <div class="col-sm-3 offset-sm-1 blog-sidebar">
+{{--                <div class="col-sm-3 offset-sm-1 blog-sidebar">
                     @include('layouts.sidebar')
-                </div>
+                </div>--}}
            </div>
         </div>
         @include('layouts.footer')

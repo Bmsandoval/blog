@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://use.fontawesome.com/5ca3a5c3b0.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -24,7 +25,6 @@
     <div class="site-wrapper-inner">
 <div class="homepage-hero-module">
     <div class="video-container">
-        <div class="filter"></div>
         <video autoplay loop class="fillWidth opaque">
             <source src="{{ asset('multimedia/Love-Coding.mp4') }}" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
             <source src="{{ asset('multimedia/Love-Coding.webm') }}" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
@@ -32,7 +32,7 @@
 
 
 
-        <div class="title-container">
+        <div class="title-container bg-danger filter bg-overlay">
         <div class="cover-container">
 
             <div class="masthead clearfix">

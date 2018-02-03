@@ -32,7 +32,7 @@
 
 
 
-        <div class="title-container bg-danger filter bg-overlay">
+        <div class="title-container">
         <div class="cover-container">
 
             <div class="masthead clearfix">
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="inner cover">
+            <div class="card bg-inverse">
                 @yield('content')
             </div>
 

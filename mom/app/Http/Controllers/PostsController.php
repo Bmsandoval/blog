@@ -17,7 +17,7 @@ class PostsController extends Controller
     {
         $posts = Post::all();
         return view('posts.index',[
-            'posts' => $posts,
+            'posts' => $posts->where('visible',true),
             'first_post' => Post::first()->get()[0],
             'last_post' => Post::last()->get()[0],
         ]);
@@ -51,6 +51,7 @@ class PostsController extends Controller
         $post->title = request('title');
         $post->description = request('synopsis');
         $post->article = request('body');
+        $post->visible = true;
 
         $post->save();
 
@@ -76,9 +77,11 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('posts.edit',[
+            'post' => $post,
+        ]);
     }
 
     /**
@@ -88,9 +91,20 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($post)
     {
-        //
+        $this->validate(request(), [
+            'title'=>'required|string',
+            'body'=>'required|string',
+        ]);
+
+        $post->title = request('title');
+        $post->description = request('synopsis');
+        $post->article = request('body');
+
+        $post->save();
+
+        return redirect('/posts/'.$post->id);
     }
 
     /**
@@ -99,8 +113,15 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($post)
     {
-        //
+        $post->visible=false;
+        Session::flash('message', 'Successfully deleted post');
+        return Redirect::to('posts');
+
+    }
+
+    public function deleted($post){
+
     }
 }

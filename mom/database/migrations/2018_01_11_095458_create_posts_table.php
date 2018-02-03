@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('article');
+            $table->boolean('visible');
             $table->timestamps();
         });
     }

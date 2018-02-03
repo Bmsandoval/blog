@@ -1,15 +1,16 @@
 @extends('posts')
 
 @section ('content')
-    <section class="jumbotron text-left">
+    <section class="jumbotron">
         <div class="container">
             <div class="blog-post">
                 <div class="row">
-                    <div class="col-sm-2">
-                        <h2 class="blog-post-title">{{$post->title}}</h2>
+                    <div class="col-sm-6">
+                        <a class="btn btn-default btn-sm" href="/posts/{{$post->id}}/edit">
+                            <i class="fa fa-pencil"></i> Edit</a>
                     </div>
-                    <div class="col-sm-2">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    <div class="col-sm-6">
+                        <h2 class="blog-post-title">{{$post->title}}</h2>
                     </div>
                 </div>
                 <div class="row">

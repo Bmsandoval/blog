@@ -23,10 +23,7 @@
     </head>
     @include('layouts.nav')
     <body>
-    <a class="btn btn-default btn-sm" href="#">
-        <i class="fa fa-cog"></i> Settings</a>
 
-    <i class="fa fa-flag"></i>
         <div class="container">
             <div class="row">
                 <div class="{{--col-sm-7 offset-sm-1 --}}blog-content">

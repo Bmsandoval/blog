@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use Request;
+use Session;
 use App\Post;
 
 class PostsController extends Controller
@@ -51,6 +54,7 @@ class PostsController extends Controller
         $post->title = request('title');
         $post->description = request('synopsis');
         $post->article = request('body');
+        $post->status_id=1;//current
         $post->visible = true;
 
         $post->save();
@@ -91,20 +95,33 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($post)
+    public function update($id)
     {
-        $this->validate(request(), [
-            'title'=>'required|string',
-            'body'=>'required|string',
-        ]);
+        $post = Post::find($id);
+        $post->visible=false;
+        if(Request::get('submit')=='save') {
+            $this->validate(request(), [
+                'title' => 'required|string',
+                'body' => 'required|string',
+            ]);
 
-        $post->title = request('title');
-        $post->description = request('synopsis');
-        $post->article = request('body');
 
-        $post->save();
+            $post->status_id=3;// updated
+            $post->save();
 
-        return redirect('/posts/'.$post->id);
+            $post = new Post();
+            $post->title = request('title');
+            $post->description = request('synopsis');
+            $post->article = request('body');
+            $post->status_id=1;// current
+            $post->visible=true;
+            $post->save();
+            return Redirect::to('/posts/' . $post->id);
+        } else if(Request::get('submit')=='remove'){
+            $post->status_id=4;// removed
+            $post->save();
+            return Redirect::to('/posts');
+        }
     }
 
     /**
@@ -113,15 +130,16 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($post)
+    public function destroy($id)
     {
-        $post->visible=false;
-        Session::flash('message', 'Successfully deleted post');
-        return Redirect::to('posts');
+        // TODO: Uncomment this once user authorization is enabled
 
-    }
+/*        $post = Post::find($id);
+        $post->delete();
 
-    public function deleted($post){
+        // redirect
+        Session::flash('message', 'Successfully deleted the nerd!');
+        return Redirect::to('/posts');*/
 
     }
 }

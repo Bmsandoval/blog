@@ -15,12 +15,16 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('title');
             $table->text('description');
             $table->text('article');
             $table->boolean('visible');
-            $table->timestamps();
+            $table->integer('status_id');
+
+            $table->timestamps(); // created_at,updated_at
         });
+
     }
 
     /**

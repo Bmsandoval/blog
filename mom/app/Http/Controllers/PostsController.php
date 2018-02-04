@@ -20,9 +20,9 @@ class PostsController extends Controller
     {
         $posts = Post::all();
         return view('posts.index',[
-            'posts' => $posts->where('visible',true),
-            'first_post' => Post::first()->get()[0],
-            'last_post' => Post::last()->get()[0],
+            'posts' => $posts->where('public',true)->where('status_id',1),
+/*            'first_post' => Post::first()->get()[0],
+            'last_post' => Post::last()->get()[0],*/
         ]);
     }
 
@@ -55,7 +55,8 @@ class PostsController extends Controller
         $post->description = request('synopsis');
         $post->article = request('body');
         $post->status_id=1;//current
-        $post->visible = true;
+        //$post->user_id=?;// TODO: get this in there somehow
+        $post->public = true;
 
         $post->save();
 
@@ -98,7 +99,7 @@ class PostsController extends Controller
     public function update($id)
     {
         $post = Post::find($id);
-        $post->visible=false;
+        $post->public=false;
         if(Request::get('submit')=='save') {
             $this->validate(request(), [
                 'title' => 'required|string',
@@ -114,7 +115,7 @@ class PostsController extends Controller
             $post->description = request('synopsis');
             $post->article = request('body');
             $post->status_id=1;// current
-            $post->visible=true;
+            $post->public=true;
             $post->save();
             return Redirect::to('/posts/' . $post->id);
         } else if(Request::get('submit')=='remove'){

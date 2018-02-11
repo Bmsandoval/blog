@@ -40,7 +40,6 @@ Route::get('/create/{token}', 'UsersController@create')->name('users.create');
 Route::post('/activate/{token}', 'UsersController@store')->name('users.store');
 // Read
 Route::get('/users/{user}', 'UsersController@show')->where('user','[a-zA-Z0-9]+')->name('users.read')->middleware('auth');
-Route::get('/users/{user}', 'UsersController@showPrivate')->where('user','[a-zA-Z0-9]+')->name('users.read')->middleware('auth');
 // Update
 Route::get('/users/{user}/edit', 'UsersController@edit')->where('user','[a-zA-Z0-9]+')->name('users.edit')->middleware('auth');
 Route::patch('/users/{id}/update', 'UsersController@update')->where('user','[a-zA-Z0-9]+')->name('users.update')->middleware('auth');

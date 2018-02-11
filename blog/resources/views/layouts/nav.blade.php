@@ -15,6 +15,8 @@
                     <li><a href="#" class="text-white">Email me</a></li>
                     @if(!Auth::check())
                         <li><a href="{{ route('login') }}" class="text-white">Login</a></li>
+                    @else
+                        <li><a href="{{ route('users') }}" class="text-white">Users</a></li>
                     @endif
 
                 </ul>

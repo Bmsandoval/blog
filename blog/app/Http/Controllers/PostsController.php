@@ -17,10 +17,10 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function list()
     {
         $posts = Post::all();
-        return view('posts.index',[
+        return view('posts.list',[
             'posts' => $posts->where('public',true)->where('status_id',1),
 /*            'first_post' => Post::first()->get()[0],
             'last_post' => Post::last()->get()[0],*/

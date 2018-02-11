@@ -39,10 +39,11 @@ Route::get('/send', 'UsersController@send')->name('users.send')->middleware('aut
 Route::get('/create', 'UsersController@create')->name('users.create')->middleware('auth');
 Route::post('/users', 'UsersController@store')->name('users.store')->middleware('auth');
 // Read
-Route::get('/users/{user}', 'UsersController@show')->where('user','[0-9\-]+')->name('users.read')->middleware('auth');
+Route::get('/users/{user}', 'UsersController@show')->where('user','[a-zA-Z0-9]+')->name('users.read')->middleware('auth');
+Route::get('/users/{user}', 'UsersController@showPrivate')->where('user','[a-zA-Z0-9]+')->name('users.read')->middleware('auth');
 // Update
-Route::get('/users/{user}/edit', 'UsersController@edit')->where('user','[0-9\-]+')->name('users.edit')->middleware('auth');
-Route::patch('/users/{id}/update', 'UsersController@update')->where('user','[0-9\-]+')->name('users.update')->middleware('auth');
+Route::get('/users/{user}/edit', 'UsersController@edit')->where('user','[a-zA-Z0-9]+')->name('users.edit')->middleware('auth');
+Route::patch('/users/{id}/update', 'UsersController@update')->where('user','[a-zA-Z0-9]+')->name('users.update')->middleware('auth');
 // Delete
 // TODO: maybe, not sure if I want this power outside direct db access
 //Route::delete('/users/{id}/delete', 'UsersController@destroy')->where('id','[0-9\-]+')->name('users.delete')->middleware('auth');

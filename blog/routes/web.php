@@ -34,7 +34,7 @@ Route::get('/posts', 'PostsController@list')->name('posts.list');
 
 //region Users Routes
 Route::get('/invite', 'UsersController@invite')->name('users.invite')->middleware('auth');
-Route::get('/send', 'UsersController@send')->name('users.send')->middleware('auth');
+Route::post('/send', 'UsersController@send')->name('users.send')->middleware('auth');
 // Create
 Route::get('/create', 'UsersController@create')->name('users.create')->middleware('auth');
 Route::post('/users', 'UsersController@store')->name('users.store')->middleware('auth');

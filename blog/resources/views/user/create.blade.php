@@ -1,26 +1,34 @@
-@extends('posts')
+@extends('main')
 
 @section('content')
     <section class="jumbotron text-left">
         <div class="container">
-            <form method="POST" action="/posts">
+            <form method="POST" action="/users">
                 {{csrf_field()}}
                 <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" class="form-control" placeholder="title" name="title">
+                    <label for="title">Name:</label>
+                    <input type="text" class="form-control" name="name">
                 </div>
 
                 <div class="form-group">
-                    <label for="body">Synopsis</label>
-                    <textarea type="text" class="form-control" placeholder="synopsis" name="synopsis"></textarea>
+                    <label for="body">Display Name:</label>
+                    <textarea type="text" class="form-control" name="username"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="body">Body</label>
-                    <textarea type="text" class="form-control" placeholder="body" name="body"></textarea>
+                    <label for="body">Email:</label>
+                    <textarea type="text" class="form-control" name="email"></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Publish</button>
+                <div class="form-group">
+                    <label for="body">Password:</label>
+                    <textarea type="password" class="form-control" name="password"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="body">Confirm Password:</label>
+                    <textarea type="password" class="form-control" name="password_confirmation"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
             </form>
             @if (count($errors))
             <div class="alert alert-danger">

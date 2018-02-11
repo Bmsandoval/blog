@@ -1,25 +1,26 @@
-@extends('posts')
+@extends('main')
 
 @section ('content')
     <section class="jumbotron">
         <div class="container">
-            <div class="blog-post">
+            <div class="blog-user">
                 <div class="row">
                     <div class="col-sm-6">
-                        <a class="btn btn-default btn-sm" href="/posts/{{$post->id}}/edit">
-                            <i class="fa fa-pencil"></i> Edit</a>
+                        @if(Auth::check())
+                            <a class="btn btn-default btn-sm" href="/users/{{$userid}}/edit">
+                                <i class="fa fa-pencil"></i> Edit</a>
+                        @endif
                     </div>
                     <div class="col-sm-6">
-                        <h2 class="blog-post-title">{{$post->title}}</h2>
+                        <h2 class="blog-user-title">User Information</h2>
                     </div>
                 </div>
-                <div class="row">
-                    <p class="blog-post-meta">Created {{$post->created_at}}</p>
-                </div>
-                <p>{{$post->description}}</p>
-                <hr>
-                <p>{{$post->article}}</p>
-            </div><!-- /.blog-post -->
+                @foreach($user as $key=>$value)
+                    <div class="row">
+                        <p class="blog-user-meta">{{ $key }} : {{ $value }}</p>
+                    </div>
+                @endforeach
+            </div><!-- /.blog-user -->
         </div>
     </section>
 @endsection

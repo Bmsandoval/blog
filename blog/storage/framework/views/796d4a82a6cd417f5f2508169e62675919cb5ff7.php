@@ -13,7 +13,11 @@
                     <li><a href="#" class="text-white">Follow on Twitter</a></li>
                     <li><a href="#" class="text-white">Like on Facebook</a></li>
                     <li><a href="#" class="text-white">Email me</a></li>
-                    <li><a href="<?php echo e(URL::to('logout')); ?>" class="text-white">Logout</a></li>
+                    <?php if(!Auth::check()): ?>
+                        <li><a href="<?php echo e(route('login')); ?>" class="text-white">Login</a></li>
+                    <?php else: ?>
+                        <li><a href="<?php echo e(route('users.read',['user'=> Auth::user()->id])); ?>" class="text-white">User</a></li>
+                    <?php endif; ?>
 
                 </ul>
             </div>

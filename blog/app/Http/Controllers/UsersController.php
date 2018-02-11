@@ -3,6 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+
+//use Illuminate\Http\Request;
+use Session;
+use App\Post;
+use App\User;
+use App\Pending_User;
+use Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -24,19 +34,20 @@ class UsersController extends Controller
         $this->validate(request(), [
             'email'=>'required|email',
         ]);
+        $email = request('email');
+        $user = new Pending_User([
+            'email' => $email,
+            'token' =>sha1(uniqid($email, true))
+        ]);
 
-        $user = new invited_user;
-        $user->email = request('email', true);
-        $user->token = sha1(uniqid($user->email));
-        $user->save();
-
-        $url = route('user.store',['token'=>$user->token]);
+        $url = route('users.store',['token'=>$user->token]);
         $message = <<<ENDMSG
 Thank you for signing up at our site.  Please go to
 $url to activate your account.
 ENDMSG;
-        mail($user->email, "Activate your account", $message);
+        mail($email, "Activate your account", $message);
 
+        return redirect('/');
     }
     /**
      * Show the form for inviting a new blogger to the team.
@@ -79,7 +90,7 @@ ENDMSG;
         }
         $pending->delete();
 
-        $user = new user;
+        $user = new User;
         $user->name = request('name');
         $user->username = request('username');
         $user->email = request('email');
@@ -97,8 +108,9 @@ ENDMSG;
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($username)
     {
+        $user = DB::table('users')->find(['username'=>$username]);
         return view('users.show',[
             'userid'=> $user->id,
             'user' => [
@@ -114,10 +126,12 @@ ENDMSG;
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(user $user)
+    public function edit($username)
     {
+        $user = DB::table('users')->find(['username'=>$username]);
         return view('users.edit',[
             'user'=>[
+                'id' => $user->id,
                 'name' => $user->name,
                 'username'=> $user->username,
                 'email'=>$user->email
@@ -132,25 +146,24 @@ ENDMSG;
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update($username)
     {
         $this->validate(request(), [
             'name'=>'required|string',
             'username'=>'required|string',
             'email'=>'required|string',
-            'password'=>'required|string',
+            'password'=>'string',
         ]);
 
 /*        $user = new user;*/
-        $user = user::find($id);
-        $user->name = request('name');
-        $user->username = request('username');
-        $user->email = request('email');
-        $user->password = Hash::make(request('password'));
-        $user->save();
+        DB::table('users')->where('username',$username)->update([
+            'name' => request('name'),
+            'username' => request('username'),
+            'email' => request('email'),
+            'password' => Hash::make(request('password'))
+        ]);
 
-        Auth::attempt([ 'email'=>$user->email, 'password'=>request('password') ]);
-        return Redirect::to('/users/' . $user->id);
+        return Redirect::to('/users/' . $username);
     }
 
     /**

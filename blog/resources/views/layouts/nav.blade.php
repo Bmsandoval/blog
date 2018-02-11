@@ -16,7 +16,7 @@
                     @if(!Auth::check())
                         <li><a href="{{ route('login') }}" class="text-white">Login</a></li>
                     @else
-                        <li><a href="{{ route('users') }}" class="text-white">Users</a></li>
+                        <li><a href="{{ route('users.read',['user'=> Auth::user()->id]) }}" class="text-white">User</a></li>
                     @endif
 
                 </ul>

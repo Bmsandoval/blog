@@ -5,10 +5,16 @@
         <div class="container">
             <div class="blog-user">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         @if(Auth::check())
                             <a class="btn btn-default btn-sm" href="/users/{{$userid}}/edit">
-                                <i class="fa fa-pencil"></i> Edit</a>
+                                <i class="fa fa-pencil"></i> Edit Information</a>
+                        @endif
+                    </div>
+                    <div class="col-sm-3">
+                        @if(Auth::check())
+                            <a class="btn btn-default btn-sm" href="/invite">
+                                <i class="fa fa-user-plus-"></i> Invite Blogger</a>
                         @endif
                     </div>
                     <div class="col-sm-6">

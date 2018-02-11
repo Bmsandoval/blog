@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Request;
 use Session;
 use App\Post;
+use Auth;
 
 class PostsController extends Controller
 {
@@ -55,7 +56,7 @@ class PostsController extends Controller
         $post->description = request('synopsis');
         $post->article = request('body');
         $post->status_id=1;//current
-        //$post->user_id=?;// TODO: get this in there somehow
+        $post->user_id=Auth::user()->id;
         $post->public = true;
 
         $post->save();

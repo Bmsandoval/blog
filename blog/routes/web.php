@@ -35,7 +35,7 @@ Route::get('/posts', 'PostsController@index')->name('posts.index');
 Route::get('login', ['as'=>'login', 'uses'=> 'Auth\LoginController@showLogin']);
 
 // route to process the form
-Route::post('login', ['as'=>'login','uses' => 'Auth\LoginController@doLogin']);
+Route::post('dologin', ['as'=>'dologin','uses' => 'Auth\LoginController@doLogin']);
 
 Route::get('logout', ['as'=>'logout','uses' => 'Auth\LoginController@doLogout']);
 

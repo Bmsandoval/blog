@@ -13,7 +13,9 @@
                     <li><a href="#" class="text-white">Follow on Twitter</a></li>
                     <li><a href="#" class="text-white">Like on Facebook</a></li>
                     <li><a href="#" class="text-white">Email me</a></li>
-                    <li><a href="{{ URL::to('logout') }}" class="text-white">Logout</a></li>
+                    @if(!Auth::check())
+                        <li><a href="{{ route('login') }}" class="text-white">Login</a></li>
+                    @endif
 
                 </ul>
             </div>

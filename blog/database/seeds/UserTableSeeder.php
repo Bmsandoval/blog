@@ -12,8 +12,7 @@ class UserTableSeeder extends Seeder
             'name'     => 'Bryan S.',
             'username' => 'Sandman',
             'email'    => 'bmsandoval@gmail.com',
-            'password' => Hash::make('jAk9UFn4ZKg34RR'),
+            'password' => Hash::make('B1fVqpnh9nyb'),
         ));
     }
-
 }

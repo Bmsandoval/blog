@@ -3,7 +3,7 @@
 @section('content')
     <section class="jumbotron text-left">
         <div class="container">
-            <form method="POST" action="/users">
+            <form method="POST" action={{"/activate/".$token}}>
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="title">Name:</label>

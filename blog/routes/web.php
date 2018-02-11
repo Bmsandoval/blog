@@ -36,8 +36,8 @@ Route::get('/posts', 'PostsController@list')->name('posts.list');
 Route::get('/invite', 'UsersController@invite')->name('users.invite')->middleware('auth');
 Route::post('/send', 'UsersController@send')->name('users.send')->middleware('auth');
 // Create
-Route::get('/create', 'UsersController@create')->name('users.create')->middleware('auth');
-Route::post('/users', 'UsersController@store')->name('users.store')->middleware('auth');
+Route::get('/create/{token}', 'UsersController@create')->name('users.create');
+Route::post('/activate/{token}', 'UsersController@store')->name('users.store');
 // Read
 Route::get('/users/{user}', 'UsersController@show')->where('user','[a-zA-Z0-9]+')->name('users.read')->middleware('auth');
 Route::get('/users/{user}', 'UsersController@showPrivate')->where('user','[a-zA-Z0-9]+')->name('users.read')->middleware('auth');

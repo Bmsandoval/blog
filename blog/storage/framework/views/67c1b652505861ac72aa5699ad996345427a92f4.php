@@ -1,18 +1,9 @@
 
 
 <?php $__env->startSection('content'); ?>
-    <?php echo e(Form::open(array('url' => 'login'))); ?>
+    <?php echo e(Form::open(array('url' => 'dologin', 'method'=>'post'))); ?>
 
-
-
-    <!-- if there are login errors, show them here -->
-    <p>
-        <?php echo e($errors->first('email')); ?>
-
-        <?php echo e($errors->first('password')); ?>
-
-    </p>
-
+    <h1>Discover the Future</h1>
     <div class="row">
         <div class="col-sm-4 text-right">
             <?php echo e(Form::label('email', 'Email Address')); ?>
@@ -34,6 +25,13 @@
         </div>
     </div>
     <div class="row"> </div>
+    <!-- Display login errors -->
+    <p>
+        <?php echo e($errors->first('email')); ?>
+
+        <?php echo e($errors->first('password')); ?>
+
+    </p>
     <?php echo e(Form::submit('Login')); ?>
 
 

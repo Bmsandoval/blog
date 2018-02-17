@@ -1,13 +1,15 @@
 @extends('main')
 
 @section('content')
-    <section class="jumbotron text-left">
-        <div class="container">
             <form method="POST" action="/send">
                 {{csrf_field()}}
-                <div class="form-group">
-                    <label for="title">Email:</label>
-                    <input type="text" class="form-control" name="name">
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-sm-6 text-left">
+                        <input type="email" class="form-control" name="email">
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Invite</button>
             </form>
@@ -20,6 +22,4 @@
                     </ul>
                 </div>
             @endif
-        </div>
-    </section>
 @endsection

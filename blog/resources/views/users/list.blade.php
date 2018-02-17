@@ -14,10 +14,7 @@
                 <div class="row">
                     @foreach($users as $user)
                         <div class="card bg-secondary" >
-                            <a href="/users/{{ $user->id }}">
-                                <h1>{{ $user->name }}</h1>
-                                <h1>{{ $user->username }}</h1>
-                            </a>
+                            <a href="/users/{{ $user }}"> </a>
                         </div>
                     @endforeach
                 </div>

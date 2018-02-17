@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="jumbotron text-left">
-        <div class="container">
+{{--        <div class="container">--}}
             <form method="POST" action={{"/activate/".$token}}>
                 {{csrf_field()}}
                 <div class="form-group">
@@ -39,6 +39,6 @@
                 </ul>
             </div>
             @endif
-        </div>
+{{--        </div>--}}
     </section>
 @endsection

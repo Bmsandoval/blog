@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
 
             $table->string('title');
             $table->text('description');
-            $table->text('article');
+            $table->longtext('article');
             $table->boolean('public');
             $table->integer('status_id');
             $table->integer('user_id');

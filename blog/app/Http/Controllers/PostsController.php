@@ -57,6 +57,7 @@ class PostsController extends Controller
             $this->validate(request(), [
                 'title' => 'required|string',
                 'body' => 'required|string',
+                'synopsis' => 'required|string',
             ]);
             $post = new Post;
 
@@ -140,6 +141,7 @@ class PostsController extends Controller
             $this->validate(request(), [
                 'title' => 'required|string',
                 'body' => 'required|string',
+                'synopsis' => 'required|string',
             ]);
 
 

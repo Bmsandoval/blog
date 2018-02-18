@@ -7,15 +7,15 @@
                 {{csrf_field()}}
                 <div class="form-group">
                     {{ Form::label('title', 'Title') }}
-                    {{ Form::text('title', 'Catchy yet descriptive title', ['class' => 'form-control']) }}
+                    {{ Form::text('title', '', ['placeholder'=>'Catchy yet descriptive title','class' => 'form-control']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('synopsis', 'Synopsis') }}
-                    {{ Form::textarea('synopsis', 'Short description of the problem and solution', ['class' => 'form-control']) }}
+                    {{ Form::textarea('synopsis', '', ['placeholder'=>'Short description of the problem and solution','class' => 'form-control']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('body', 'Body') }}
-                    {{ Form::textarea('body', 'Tell the world what you did', ['class' => 'form-control']) }}
+                    {{ Form::textarea('body', '', ['placeholder'=>'Tell the world what you did','class' => 'form-control']) }}
                 </div>
                 {{ Form::button('Publish',['type'=>'submit','name'=>'submit','value'=>'publish','class'=>'btn btn-outline-success']) }}
                 {{ Form::button('Stash',['type'=>'submit','name'=>'submit','value'=>'stash','class'=>'btn btn-outline-warning']) }}

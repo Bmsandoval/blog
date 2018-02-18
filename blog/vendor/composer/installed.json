@@ -2254,71 +2254,6 @@
         ]
     },
     {
-        "name": "phpspec/prophecy",
-        "version": "1.7.3",
-        "version_normalized": "1.7.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/phpspec/prophecy.git",
-            "reference": "e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf",
-            "reference": "e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/instantiator": "^1.0.2",
-            "php": "^5.3|^7.0",
-            "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0",
-            "sebastian/comparator": "^1.1|^2.0",
-            "sebastian/recursion-context": "^1.0|^2.0|^3.0"
-        },
-        "require-dev": {
-            "phpspec/phpspec": "^2.5|^3.2",
-            "phpunit/phpunit": "^4.8.35 || ^5.7"
-        },
-        "time": "2017-11-24 13:59:53",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.7.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Prophecy\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Konstantin Kudryashov",
-                "email": "ever.zet@gmail.com",
-                "homepage": "http://everzet.com"
-            },
-            {
-                "name": "Marcello Duarte",
-                "email": "marcello.duarte@gmail.com"
-            }
-        ],
-        "description": "Highly opinionated mocking framework for PHP 5.3+",
-        "homepage": "https://github.com/phpspec/prophecy",
-        "keywords": [
-            "Double",
-            "Dummy",
-            "fake",
-            "mock",
-            "spy",
-            "stub"
-        ]
-    },
-    {
         "name": "phar-io/version",
         "version": "1.0.1",
         "version_normalized": "1.0.1.0",
@@ -3900,73 +3835,6 @@
         ]
     },
     {
-        "name": "laravelcollective/html",
-        "version": "v5.5.1",
-        "version_normalized": "5.5.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/LaravelCollective/html.git",
-            "reference": "2f6dc39ab3655724a615fe8a652d8b7f04fc9ac6"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/LaravelCollective/html/zipball/2f6dc39ab3655724a615fe8a652d8b7f04fc9ac6",
-            "reference": "2f6dc39ab3655724a615fe8a652d8b7f04fc9ac6",
-            "shasum": ""
-        },
-        "require": {
-            "illuminate/http": "5.5.*",
-            "illuminate/routing": "5.5.*",
-            "illuminate/session": "5.5.*",
-            "illuminate/support": "5.5.*",
-            "illuminate/view": "5.5.*",
-            "php": ">=7.0.0"
-        },
-        "require-dev": {
-            "illuminate/database": "5.5.*",
-            "mockery/mockery": "~0.9.4",
-            "phpunit/phpunit": "~5.4"
-        },
-        "time": "2017-08-31 14:46:03",
-        "type": "library",
-        "extra": {
-            "laravel": {
-                "providers": [
-                    "Collective\\Html\\HtmlServiceProvider"
-                ],
-                "aliases": {
-                    "Form": "Collective\\Html\\FormFacade",
-                    "Html": "Collective\\Html\\HtmlFacade"
-                }
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Collective\\Html\\": "src/"
-            },
-            "files": [
-                "src/helpers.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Taylor Otwell",
-                "email": "taylorotwell@gmail.com"
-            },
-            {
-                "name": "Adam Engebretson",
-                "email": "adam@laravelcollective.com"
-            }
-        ],
-        "description": "HTML and Form Builders for the Laravel Framework",
-        "homepage": "http://laravelcollective.com"
-    },
-    {
         "name": "laravel/framework",
         "version": "v5.5.34",
         "version_normalized": "5.5.34.0",
@@ -4103,54 +3971,55 @@
         ]
     },
     {
-        "name": "laravel/scout",
-        "version": "v4.0.1",
-        "version_normalized": "4.0.1.0",
+        "name": "laravelcollective/html",
+        "version": "v5.5.3",
+        "version_normalized": "5.5.3.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/laravel/scout.git",
-            "reference": "28a88fa764cd2bf0225e427b067a024f7cbb5d4f"
+            "url": "https://github.com/LaravelCollective/html.git",
+            "reference": "b79edc7acf574144c9811277286b4cafee8a07cc"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/scout/zipball/28a88fa764cd2bf0225e427b067a024f7cbb5d4f",
-            "reference": "28a88fa764cd2bf0225e427b067a024f7cbb5d4f",
+            "url": "https://api.github.com/repos/LaravelCollective/html/zipball/b79edc7acf574144c9811277286b4cafee8a07cc",
+            "reference": "b79edc7acf574144c9811277286b4cafee8a07cc",
             "shasum": ""
         },
         "require": {
-            "illuminate/bus": "~5.4",
-            "illuminate/contracts": "~5.4",
-            "illuminate/database": "~5.4",
-            "illuminate/pagination": "~5.4",
-            "illuminate/queue": "~5.4",
-            "illuminate/support": "~5.4",
-            "php": ">=7.0"
+            "illuminate/http": "5.5.*",
+            "illuminate/routing": "5.5.*",
+            "illuminate/session": "5.5.*",
+            "illuminate/support": "5.5.*",
+            "illuminate/view": "5.5.*",
+            "php": ">=7.0.0"
         },
         "require-dev": {
-            "algolia/algoliasearch-client-php": "^1.10",
-            "mockery/mockery": "~1.0",
-            "phpunit/phpunit": "~6.0"
+            "illuminate/database": "5.5.*",
+            "mockery/mockery": "~0.9.4",
+            "phpunit/phpunit": "~5.4"
         },
-        "suggest": {
-            "algolia/algoliasearch-client-php": "Required to use the Algolia engine (^1.10)."
-        },
-        "time": "2018-02-12 14:35:52",
+        "time": "2018-02-12 14:19:55",
         "type": "library",
         "extra": {
-            "branch-alias": {
-                "dev-master": "3.0-dev"
-            },
+            "branch-alias": [],
             "laravel": {
                 "providers": [
-                    "Laravel\\Scout\\ScoutServiceProvider"
-                ]
+                    "Collective\\Html\\HtmlServiceProvider"
+                ],
+                "aliases": {
+                    "Form": "Collective\\Html\\FormFacade",
+                    "Html": "Collective\\Html\\HtmlFacade"
+                }
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Laravel\\Scout\\": "src/"
-            }
+                "Collective\\Html\\": "src/"
+            },
+            "files": [
+                "src/helpers.php"
+            ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -4159,45 +4028,53 @@
         "authors": [
             {
                 "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
+                "email": "taylorotwell@gmail.com"
+            },
+            {
+                "name": "Adam Engebretson",
+                "email": "adam@laravelcollective.com"
             }
         ],
-        "description": "Laravel Scout provides a driver based solution to searching your Eloquent models.",
-        "keywords": [
-            "algolia",
-            "laravel",
-            "search"
-        ]
+        "description": "HTML and Form Builders for the Laravel Framework",
+        "homepage": "https://laravelcollective.com"
     },
     {
-        "name": "algolia/algoliasearch-client-php",
-        "version": "1.25.0",
-        "version_normalized": "1.25.0.0",
+        "name": "phpspec/prophecy",
+        "version": "1.7.4",
+        "version_normalized": "1.7.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/algolia/algoliasearch-client-php.git",
-            "reference": "0fd6eabe909c3f860ac3ff38f595a735e74ff6da"
+            "url": "https://github.com/phpspec/prophecy.git",
+            "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/0fd6eabe909c3f860ac3ff38f595a735e74ff6da",
-            "reference": "0fd6eabe909c3f860ac3ff38f595a735e74ff6da",
+            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
+            "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
             "shasum": ""
         },
         "require": {
-            "ext-mbstring": "*",
-            "php": ">=5.3"
+            "doctrine/instantiator": "^1.0.2",
+            "php": "^5.3|^7.0",
+            "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0",
+            "sebastian/comparator": "^1.1|^2.0",
+            "sebastian/recursion-context": "^1.0|^2.0|^3.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4",
-            "satooshi/php-coveralls": "^1.0"
+            "phpspec/phpspec": "^2.5|^3.2",
+            "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5"
         },
-        "time": "2017-12-28 08:10:23",
+        "time": "2018-02-11 18:49:29",
         "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.7.x-dev"
+            }
+        },
         "installation-source": "dist",
         "autoload": {
             "psr-0": {
-                "AlgoliaSearch": "src/"
+                "Prophecy\\": "src/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -4206,19 +4083,24 @@
         ],
         "authors": [
             {
-                "name": "Algolia Team",
-                "email": "contact@algolia.com"
+                "name": "Konstantin Kudryashov",
+                "email": "ever.zet@gmail.com",
+                "homepage": "http://everzet.com"
             },
             {
-                "name": "Ryan T. Catlin",
-                "email": "ryan.catlin@gmail.com"
-            },
-            {
-                "name": "Jonathan H. Wage",
-                "email": "jonwage@gmail.com"
+                "name": "Marcello Duarte",
+                "email": "marcello.duarte@gmail.com"
             }
         ],
-        "description": "Algolia Search API Client for PHP",
-        "homepage": "https://github.com/algolia/algoliasearch-client-php"
+        "description": "Highly opinionated mocking framework for PHP 5.3+",
+        "homepage": "https://github.com/phpspec/prophecy",
+        "keywords": [
+            "Double",
+            "Dummy",
+            "fake",
+            "mock",
+            "spy",
+            "stub"
+        ]
     }
 ]

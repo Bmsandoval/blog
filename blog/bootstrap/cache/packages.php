@@ -25,11 +25,4 @@
       'Html' => 'Collective\\Html\\HtmlFacade',
     ),
   ),
-  'laravel/scout' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Scout\\ScoutServiceProvider',
-    ),
-  ),
 );

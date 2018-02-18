@@ -25,20 +25,20 @@
     </div>
     <div class="navbar navbar-inverse bg-inverse">
         <div class="row">
-            <div class="text-white col-sm-2">Skynet.How</div>
-            <div class="text-white col-sm-2">
+            <div class="text-white col-sm-2 text-left">Skynet.How</div>
+            <div class="text-white col-sm-3">
                 <a href="/" class="navbar-brand">Home</a>
             </div>
-            <div class="text-white col-sm-2">
+            <div class="text-white col-sm-3">
                 <a href="/posts" class="navbar-brand">Blog</a>
             </div>
             <div class="text-white col-sm-2">
-                <a href="/items" class="navbar-brand">Shop</a>
-            </div>
-            <div class="text-white col-sm-3">
                 <a href="/about" class="navbar-brand">About</a>
             </div>
-            <div class="text-white col-sm-1">
+{{--                        <div class="text-white col-sm-2">
+                            <a href="/items" class="navbar-brand">Shop</a>
+                        </div>--}}
+            <div class="text-white col-sm-2 text-right">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

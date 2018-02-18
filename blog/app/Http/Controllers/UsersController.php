@@ -41,13 +41,15 @@ class UsersController extends Controller
         ]);
 
         $url = route('users.store',['token'=>$user->token]);
-        $message = <<<ENDMSG
+/*        $message = <<<ENDMSG
 Thank you for signing up at our site.  Please go to
 $url to activate your account.
 ENDMSG;
-        mail($email, "Activate your account", $message);
+        mail($email, "Activate your account", $message);*/
 
-        return redirect('/');
+        return view('users.invite',[
+            'signupLink' => $url
+        ]);
     }
     /**
      * Show the form for inviting a new blogger to the team.
@@ -56,7 +58,7 @@ ENDMSG;
      */
     public function invite()
     {
-        return view('users.invite');
+        return view('users.invite',['signupLink'=>'']);
     }
 
 

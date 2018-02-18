@@ -13,6 +13,9 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Invite</button>
             </form>
+            @if ($signupLink)
+                Provide new user with signup link: <?=$signupLink?>
+            @endif
             @if (count($errors))
                 <div class="alert alert-danger">
                     <ul>

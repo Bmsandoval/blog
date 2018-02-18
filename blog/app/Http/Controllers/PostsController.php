@@ -21,12 +21,19 @@ class PostsController extends Controller
     {
         $posts = Post::all();
         return view('posts.list',[
-            'posts' => $posts->where('public',true)->where('status_id',1),
-/*            'first_post' => Post::first()->get()[0],
-            'last_post' => Post::last()->get()[0],*/
+            'posts' => $posts->where('public',true)->where('status_id',Post::current),
+            'stash'=>false,
         ]);
     }
 
+    public function stash()
+    {
+        $posts = Post::all();
+        return view('posts.list',[
+            'posts' => $posts->where('owner_id',Auth::user()->id)->where('status_id',Post::drafted),
+            'stash' => true,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -46,22 +53,46 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'title'=>'required|string',
-            'body'=>'required|string',
-        ]);
-        $post = new Post;
+        if(Request::get('submit')=='publish') {
+            $this->validate(request(), [
+                'title' => 'required|string',
+                'body' => 'required|string',
+            ]);
+            $post = new Post;
 
-        $post->title = request('title');
-        $post->description = request('synopsis');
-        $post->article = request('body');
-        $post->status_id=1;//current
-        $post->user_id=Auth::user()->id;
-        $post->public = true;
+            $post->title = request('title');
+            $post->description = request('synopsis');
+            $post->article = request('body');
+            $post->status_id = Post::current;
+            $post->user_id = Auth::user()->id;
+            $post->public = true;
 
-        $post->save();
+            $post->save();
 
-        return redirect('/posts/'.$post->id);
+            return redirect('/posts/' . $post->id);
+        }
+        else if (Request::get('submit')=='stash'){
+            $this->validate(request(), [
+                'title' => 'required|string',
+                'body' => 'required|string',
+            ]);
+            $post = new Post;
+
+            $post->title = request('title');
+            $post->description = request('synopsis');
+            $post->article = request('body');
+            $post->status_id = Post::drafted;
+            $post->user_id = Auth::user()->id;
+            $post->public = false;
+
+            $post->save();
+
+            return redirect('/posts');
+
+        }
+        else if (Request::get('submit')=='discard'){
+            return redirect('/posts');
+        }
     }
 
     /**
@@ -72,9 +103,12 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show',[
-            'post' => $post,
-        ]);
+        if( ($post->status_id == Post::current) || (Auth::check() && $post->owner_id == Auth::user()->id && $post->status_id == Post::drafted)){
+            return view('posts.show', [
+                'post' => $post,
+            ]);
+        }
+        return view('posts');
     }
 
     /**
@@ -100,27 +134,28 @@ class PostsController extends Controller
     public function update($id)
     {
         $post = Post::find($id);
-        $post->public=false;
-        if(Request::get('submit')=='save') {
+        $wasPublic = $post->public;
+        $post->public = false;
+        if(Request::get('submit')=='publish') {
             $this->validate(request(), [
                 'title' => 'required|string',
                 'body' => 'required|string',
             ]);
 
 
-            $post->status_id=3;// updated
+            $post->status_id=Post::updated;
             $post->save();
 
             $post = new Post();
             $post->title = request('title');
             $post->description = request('synopsis');
             $post->article = request('body');
-            $post->status_id=1;// current
-            $post->public=true;
+            $post->status_id=Post::current;
+            $post->public=$wasPublic;
             $post->save();
             return Redirect::to('/posts/' . $post->id);
-        } else if(Request::get('submit')=='remove'){
-            $post->status_id=4;// removed
+        } else if(Request::get('submit')=='delete'){
+            $post->status_id=Post::removed;
             $post->save();
             return Redirect::to('/posts');
         }

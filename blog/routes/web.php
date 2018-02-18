@@ -18,18 +18,27 @@ Route::get('/items/{item}', 'ItemsController@show');
 
 //region Posts Routes
 // Create
-Route::get('/create', 'PostsController@create')->name('posts.create')->middleware('auth');
-Route::post('/posts', 'PostsController@store')->name('posts.store')->middleware('auth');
+Route::get('/create', ['as'=>'posts.create','uses'=>'PostsController@create'])
+    ->middleware('auth');
+Route::post('/posts', ['as'=>'posts.store','uses'=>'PostsController@store'])
+    ->middleware('auth');
 // Read
-Route::get('/posts/{post}', 'PostsController@show')->where('post','[0-9\-]+')->name('posts.read');
+Route::get('/posts/{post}', ['as'=>'post','uses'=>'PostsController@show'])
+    ->where('post','[0-9\-]+');
 // Update
-Route::get('/posts/{post}/edit', 'PostsController@edit')->where('post','[0-9\-]+')->name('posts.edit')->middleware('auth');
-Route::patch('/posts/{id}/update', 'PostsController@update')->where('id','[0-9\-]+')->name('posts.update')->middleware('auth');
+Route::get('/posts/{post}/edit', ['as'=>'posts.edit', 'uses'=>'PostsController@edit'])
+    ->where('post','[0-9\-]+')
+    ->middleware('auth');
+Route::patch('/posts/{id}/update', ['as'=> 'posts.update', 'uses'=>'PostsController@update'])
+    ->where('id','[0-9\-]+')
+    ->middleware('auth');
 // Delete
 // TODO: uncomment following line once users are enabled
 //Route::delete('/posts/{id}/delete', 'PostsController@destroy')->where('id','[0-9\-]+')->name('posts.delete')->middleware('auth');
 // List
-Route::get('/posts', 'PostsController@list')->name('posts.list');
+Route::get('/posts', ['as'=>'posts.list', 'uses'=>'PostsController@list']);
+Route::get('/posts/stash', ['as'=>'posts.stash', 'uses'=>'PostsController@stash'])
+    ->middleware('auth');
 //endregion
 
 //region Users Routes

@@ -30,7 +30,7 @@ class PostsController extends Controller
     {
         $posts = Post::all();
         return view('posts.list',[
-            'posts' => $posts->where('owner_id',Auth::user()->id)->where('status_id',Post::drafted),
+            'posts' => $posts->where('user_id',Auth::user()->id)->where('status_id',Post::drafted),
             'stash' => true,
         ]);
     }

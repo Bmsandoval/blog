@@ -24,7 +24,7 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <p>{{$post->article}}</p>
+                    <p>{!! nl2br($post->article) !!}</p>
                 </div>
             </div><!-- /.blog-post -->
         </div>

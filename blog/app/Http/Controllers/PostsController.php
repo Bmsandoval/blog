@@ -109,7 +109,7 @@ class PostsController extends Controller
                 'post' => $post,
             ]);
         }
-        return view('posts');
+        return redirect('/posts');
     }
 
     /**

@@ -5,6 +5,7 @@
         @include('layouts.head')
         <!-- Custom styles for this template -->
         <link href="{{ asset('css/posts.css') }}" rel="stylesheet">
+{{--        <link href="{{ asset('css/themeroller/jquery-ui.css') }}" rel="stylesheet">--}}
     </head>
     @include('layouts.nav')
     <body>

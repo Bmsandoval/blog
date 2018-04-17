@@ -12,3 +12,7 @@ vendor/
 config/app.php
 composer.lock
 bootstrap/cache/
+../storage/
+.htaccess
+database/database.mysql
+public/.htaccess

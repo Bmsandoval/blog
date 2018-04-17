@@ -27,29 +27,32 @@
         </section>
 
         <div class="container text-muted">
-            <div class="row">
-                <div id="accordion" role="tablist" aria-multiselectable="true">
-                @foreach($posts as $post)
-                    <div class="card col-lg-3 offset-lg-1 bg-light" >
-                        <div class="card-header" role="tab" id="heading_{{ $post->id }}">
-                            <h5 class="mb-0">
-                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{ $post->id }}" aria-expanded="false" aria-controls="collapse_{{ $post->id }}">
-                                    {{ substr($post->title,0,30) }}
-                                </a>
-                            </h5>
-                        </div>
-                        <a href="/posts/{{ $post->id }}" class="block-link" style="color:inherit">
-                            <div id="collapse_{{ $post->id }}" class="collapse" role="tabpanel" aria-labelledby="heading_{{ $post->id }}">
-                                <div class="card-block">
-                                    <hr>
-                                    <p class="card-text">{{ substr($post->description,0,120) }}</p>
+                <div class="row">
+                @foreach($posts as $key => $column)
+                    <div id="accordion_{{ $key }}" role="tablist" aria-multiselectable="true" class="col-lg-3 offset-lg-1 bg-light">
+                        <div class="row">
+                        @foreach($column as $post)
+                            <div class="card bg-light col-lg-12" >
+                                <a class="collapsed block-link" style="color:inherit" data-toggle="collapse" data-parent="#accordion_{{ $key }}"
+                                   href="#collapse_{{ $post->id }}" aria-expanded="false" aria-controls="collapse_{{ $post->id }}">
+                                <div class="card-header" role="tab" id="heading_{{ $post->id }}">
+                                    <h5 class="mb-0">
+                                            {{ substr($post->title,0,30) }}
+                                    </h5>
                                 </div>
+                                </a>
+                                <a href="/posts/{{ $post->id }}" class="block-link" style="color:inherit">
+                                <div id="collapse_{{ $post->id }}" class="collapse" role="tabpanel" aria-labelledby="heading_{{ $post->id }}">
+                                    <div class="card-block">
+                                        <p class="card-text">{{ substr($post->description,0,120) }}</p>
+                                    </div>
+                                </div>
+                                </a>
                             </div>
-                        </a>
+                        @endforeach
+                        </div>
                     </div>
                 @endforeach
-                    </div>
-                </div>
             </div>
         </div>
 

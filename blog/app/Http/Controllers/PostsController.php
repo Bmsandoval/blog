@@ -20,8 +20,14 @@ class PostsController extends Controller
     public function list()
     {
         $posts = Post::all();
+        $posts = $posts->where('public',true)->where('status_id',Post::current);
+        # columnize $posts
+        $col_posts = [];
+        foreach($posts as $key => $post) {
+            $col_posts[$key % 3][]=$post;
+        }
         return view('posts.list',[
-            'posts' => $posts->where('public',true)->where('status_id',Post::current),
+            'posts' => $col_posts,
             'stash'=>false,
         ]);
     }

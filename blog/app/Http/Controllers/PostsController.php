@@ -23,8 +23,10 @@ class PostsController extends Controller
         $posts = $posts->where('public',true)->where('status_id',Post::current);
         # columnize $posts
         $col_posts = [];
+        $i = 0;
         foreach($posts as $key => $post) {
-            $col_posts[$key % 3][]=$post;
+            $col_posts[$i % 3][]=$post;
+            $i++;
         }
         return view('posts.list',[
             'posts' => $col_posts,
@@ -38,8 +40,10 @@ class PostsController extends Controller
         $posts = $posts->where('user_id',Auth::user()->id)->where('status_id',Post::drafted);
         # columnize $posts
         $col_posts = [];
+        $i = 0;
         foreach($posts as $key => $post) {
-            $col_posts[$key % 3][]=$post;
+            $col_posts[$i % 3][]=$post;
+            $i++;
         }
         return view('posts.list',[
             'posts' => $col_posts,

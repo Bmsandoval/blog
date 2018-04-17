@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Request;
 use Session;
 use App\Post;
+use Auth;
 
 class PostsController extends Controller
 {
@@ -16,16 +17,39 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function list()
     {
         $posts = Post::all();
-        return view('posts.index',[
-            'posts' => $posts->where('public',true)->where('status_id',1),
-/*            'first_post' => Post::first()->get()[0],
-            'last_post' => Post::last()->get()[0],*/
+        $posts = $posts->where('public',true)->where('status_id',Post::current);
+        # columnize $posts
+        $col_posts = [];
+        $i = 0;
+        foreach($posts as $key => $post) {
+            $col_posts[$i % 3][]=$post;
+            $i++;
+        }
+        return view('posts.list',[
+            'posts' => $col_posts,
+            'stash'=>false,
         ]);
     }
 
+    public function stash()
+    {
+        $posts = Post::all();
+        $posts = $posts->where('user_id',Auth::user()->id)->where('status_id',Post::drafted);
+        # columnize $posts
+        $col_posts = [];
+        $i = 0;
+        foreach($posts as $key => $post) {
+            $col_posts[$i % 3][]=$post;
+            $i++;
+        }
+        return view('posts.list',[
+            'posts' => $col_posts,
+            'stash' => true,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -45,22 +69,47 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'title'=>'required|string',
-            'body'=>'required|string',
-        ]);
-        $post = new Post;
+        if(Request::get('submit')=='publish') {
+            $this->validate(request(), [
+                'title' => 'required|string',
+                'body' => 'required|string',
+                'synopsis' => 'required|string',
+            ]);
+            $post = new Post;
 
-        $post->title = request('title');
-        $post->description = request('synopsis');
-        $post->article = request('body');
-        $post->status_id=1;//current
-        //$post->user_id=?;// TODO: get this in there somehow
-        $post->public = true;
+            $post->title = request('title');
+            $post->description = request('synopsis');
+            $post->article = request('body');
+            $post->status_id = Post::current;
+            $post->user_id = Auth::user()->id;
+            $post->public = true;
 
-        $post->save();
+            $post->save();
 
-        return redirect('/posts/'.$post->id);
+            return redirect('/posts/' . $post->id);
+        }
+        else if (Request::get('submit')=='stash'){
+            $this->validate(request(), [
+                'title' => 'required|string',
+                'body' => 'required|string',
+            ]);
+            $post = new Post;
+
+            $post->title = request('title');
+            $post->description = request('synopsis');
+            $post->article = request('body');
+            $post->status_id = Post::drafted;
+            $post->user_id = Auth::user()->id;
+            $post->public = false;
+
+            $post->save();
+
+            return redirect('/posts');
+
+        }
+        else if (Request::get('submit')=='discard'){
+            return redirect('/posts');
+        }
     }
 
     /**
@@ -71,9 +120,12 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show',[
-            'post' => $post,
-        ]);
+        if( ($post->status_id == Post::current) || (Auth::check() && $post->user_id == Auth::user()->id && $post->status_id == Post::drafted)){
+            return view('posts.show', [
+                'post' => $post,
+            ]);
+        }
+        return redirect('/posts');
     }
 
     /**
@@ -99,27 +151,49 @@ class PostsController extends Controller
     public function update($id)
     {
         $post = Post::find($id);
-        $post->public=false;
-        if(Request::get('submit')=='save') {
+        $user_id = $post->user_id;
+        $post->public = false;
+        if (Request::get('submit') == 'publish') {
             $this->validate(request(), [
                 'title' => 'required|string',
                 'body' => 'required|string',
+                'synopsis' => 'required|string',
             ]);
 
 
-            $post->status_id=3;// updated
+            $post->status_id = Post::updated;
             $post->save();
 
             $post = new Post();
             $post->title = request('title');
             $post->description = request('synopsis');
             $post->article = request('body');
-            $post->status_id=1;// current
-            $post->public=true;
+            $post->status_id = Post::current;
+            $post->public = true;
+            $post->user_id = $user_id;
             $post->save();
             return Redirect::to('/posts/' . $post->id);
-        } else if(Request::get('submit')=='remove'){
-            $post->status_id=4;// removed
+        } else if (Request::get('submit') == 'stash'){
+            $this->validate(request(), [
+                'title' => 'required|string',
+                'body' => 'required|string',
+                'synopsis' => 'required|string',
+            ]);
+            $post->status_id = Post::updated;
+            $post->save();
+
+            $post = new Post();
+            $post->title = request('title');
+            $post->description = request('synopsis');
+            $post->article = request('body');
+            $post->status_id = Post::drafted;
+            $post->public = false;
+            $post->user_id = $user_id;
+            $post->save();
+            return Redirect::to('/posts/' . $post->id);
+
+        } else if(Request::get('submit')=='delete'){
+            $post->status_id=Post::removed;
             $post->save();
             return Redirect::to('/posts');
         }

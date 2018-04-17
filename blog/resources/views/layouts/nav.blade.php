@@ -10,10 +10,13 @@
             <div class="col-sm-2 py-4 text-left">
                 <h4 class="text-white">Contact</h4>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                    <li><a href="#" class="text-white">Like on Facebook</a></li>
-                    <li><a href="#" class="text-white">Email me</a></li>
-                    <li><a href="{{ URL::to('logout') }}" class="text-white">Logout</a></li>
+                    <li><a href="https://www.linkedin.com/in/bryan-sandoval-36bbb51a/" class="text-white">Follow on LinkedIn</a></li>
+                    <li><a href="skynethow@gmail.com" class="text-white">Email me</a></li>
+                    @if(!Auth::check())
+                        <li><a href="{{ route('login') }}" class="text-white">Login</a></li>
+                    @else
+                        <li><a href="{{ route('users.read',['user'=> Auth::user()->id]) }}" class="text-white">User</a></li>
+                    @endif
 
                 </ul>
             </div>
@@ -21,20 +24,17 @@
     </div>
     <div class="navbar navbar-inverse bg-inverse">
         <div class="row">
-            <div class="text-white col-sm-2">Skynet.How</div>
-            <div class="text-white col-sm-2">
+            <div class="text-white col-sm-2 text-left">Skynet.How</div>
+            <div class="text-white col-sm-3">
                 <a href="/" class="navbar-brand">Home</a>
             </div>
-            <div class="text-white col-sm-2">
+            <div class="text-white col-sm-3">
                 <a href="/posts" class="navbar-brand">Blog</a>
             </div>
             <div class="text-white col-sm-2">
-                <a href="/items" class="navbar-brand">Shop</a>
-            </div>
-            <div class="text-white col-sm-3">
                 <a href="/about" class="navbar-brand">About</a>
             </div>
-            <div class="text-white col-sm-1">
+            <div class="text-white col-sm-2 text-right">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

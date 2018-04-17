@@ -11,6 +11,13 @@ body {
     min-height: 75rem; /* Can be removed; just added for demo purposes */
 }
 
+.block-link  {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+
 .navbar {
     margin-bottom: 0;
 }

@@ -11,3 +11,4 @@ storage/
 vendor/
 config/app.php
 composer.lock
+bootstrap/cached/

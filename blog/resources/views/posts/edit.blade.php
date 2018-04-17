@@ -18,6 +18,7 @@
                     {{ Form::textarea('body', $post->article, ['class' => 'form-control']) }}
                 </div>
                 {{ Form::button('Publish', ['type'=>'submit','name'=>'submit','value'=>'publish','class'=>'btn btn-outline-success']) }}
+                {{ Form::button('Stash',['type'=>'submit','name'=>'submit','value'=>'stash','class'=>'btn btn-outline-warning']) }}
                 {{ Form::button('Delete', ['type'=>'submit','name'=>'submit','value'=>'delete','class'=>'btn btn-outline-danger']) }}
             {{ Form::close() }}
             @if (count($errors))

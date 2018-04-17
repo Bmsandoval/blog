@@ -35,8 +35,14 @@ class PostsController extends Controller
     public function stash()
     {
         $posts = Post::all();
+        $posts = $posts->where('user_id',Auth::user()->id)->where('status_id',Post::drafted);
+        # columnize $posts
+        $col_posts = [];
+        foreach($posts as $key => $post) {
+            $col_posts[$key % 3][]=$post;
+        }
         return view('posts.list',[
-            'posts' => $posts->where('user_id',Auth::user()->id)->where('status_id',Post::drafted),
+            'posts' => $col_posts,
             'stash' => true,
         ]);
     }
@@ -110,7 +116,7 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        if( ($post->status_id == Post::current) || (Auth::check() && $post->owner_id == Auth::user()->id && $post->status_id == Post::drafted)){
+        if( ($post->status_id == Post::current) || (Auth::check() && $post->user_id == Auth::user()->id && $post->status_id == Post::drafted)){
             return view('posts.show', [
                 'post' => $post,
             ]);
@@ -142,6 +148,7 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         $wasPublic = $post->public;
+        $user_id = $post->user_id;
         $post->public = false;
         if(Request::get('submit')=='publish') {
             $this->validate(request(), [
@@ -159,7 +166,8 @@ class PostsController extends Controller
             $post->description = request('synopsis');
             $post->article = request('body');
             $post->status_id=Post::current;
-            $post->public=$wasPublic;
+            $post->public=true;
+            $post->user_id=$user_id;
             $post->save();
             return Redirect::to('/posts/' . $post->id);
         } else if(Request::get('submit')=='delete'){

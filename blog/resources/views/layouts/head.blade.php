@@ -12,7 +12,7 @@
 <link href=" {{ asset('css/site.css') }}" rel="stylesheet">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-<style>
+{{--<style>
     body{
         font-family: "Trebuchet MS", sans-serif;
         margin: 50px;
@@ -54,5 +54,5 @@
     select {
         width: 200px;
     }
-</style>
+</style>--}}
 

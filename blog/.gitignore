@@ -8,4 +8,6 @@
 
 .env
 storage/
+vendor/
 config/app.php
+composer.lock

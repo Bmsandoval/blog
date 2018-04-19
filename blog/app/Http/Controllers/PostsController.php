@@ -9,6 +9,7 @@ use Request;
 use Session;
 use App\Post;
 use Auth;
+use File;
 
 class PostsController extends Controller
 {
@@ -216,5 +217,18 @@ class PostsController extends Controller
         Session::flash('message', 'Successfully deleted the nerd!');
         return Redirect::to('/posts');*/
 
+    }
+    public function setlive()
+    {
+        $content = request('content');
+        $file = "test.blade.php";
+        $fp = fopen($file, 'w+');
+        fwrite($fp, $content);
+        fclose($fp);
+    }
+    public function getlive()
+    {
+        #return view('posts.test');
+        return File::get(public_path()."/test.blade.php");
     }
 }

@@ -36,10 +36,10 @@
         <div class="container text-muted">
                 <div class="row">
                 @foreach($posts as $key => $column)
-                    <div id="accordion_{{ $key }}" role="tablist" aria-multiselectable="true" class="col-lg-3 offset-lg-1 bg-light">
+                    <div id="accordion_{{ $key }}" role="tablist" aria-multiselectable="true" class="col-sm-3 offset-sm-1 bg-light">
                         <div class="row">
                         @foreach($column as $post)
-                            <div class="card bg-light col-lg-12" >
+                            <div class="card bg-light col-sm-12" >
                                 <a class="collapsed block-link" style="color:inherit" data-toggle="collapse" data-parent="#accordion_{{ $key }}"
                                    href="#collapse_{{ $post->id }}" aria-expanded="false" aria-controls="collapse_{{ $post->id }}">
                                 <div class="card-header" role="tab" id="heading_{{ $post->id }}">

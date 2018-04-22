@@ -58,8 +58,16 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
-        //
+        return view('posts.edit',[
+            'html_verb' => 'POST',
+            'route_name' => 'posts.store',
+            'post' => (object) [
+                'id' => '',
+                'title' => '',
+                'description' => '',
+                'article' => '',
+            ],
+        ]);
     }
 
     /**
@@ -72,15 +80,15 @@ class PostsController extends Controller
     {
         if(Request::get('submit')=='publish') {
             $this->validate(request(), [
-                'title' => 'required|string',
-                'body' => 'required|string',
-                'synopsis' => 'required|string',
+                'post_title' => 'required|string',
+                'post_body' => 'required|string',
+                'post_synopsis' => 'required|string',
             ]);
             $post = new Post;
 
-            $post->title = request('title');
-            $post->description = request('synopsis');
-            $post->article = request('body');
+            $post->title = request('post_title');
+            $post->description = request('post_synopsis');
+            $post->article = request('post_body');
             $post->status_id = Post::current;
             $post->user_id = Auth::user()->id;
             $post->public = true;
@@ -91,14 +99,14 @@ class PostsController extends Controller
         }
         else if (Request::get('submit')=='stash'){
             $this->validate(request(), [
-                'title' => 'required|string',
-                'body' => 'required|string',
+                'post_title' => 'required|string',
+                'post_body' => 'required|string',
             ]);
             $post = new Post;
 
-            $post->title = request('title');
-            $post->description = request('synopsis');
-            $post->article = request('body');
+            $post->title = request('post_title');
+            $post->description = request('post_synopsis');
+            $post->article = request('post_body');
             $post->status_id = Post::drafted;
             $post->user_id = Auth::user()->id;
             $post->public = false;
@@ -138,6 +146,8 @@ class PostsController extends Controller
     public function edit(Post $post)
     {
         return view('posts.edit',[
+            'html_verb' => 'PATCH',
+            'route_name' => 'posts.update',
             'post' => $post,
         ]);
     }
@@ -156,9 +166,9 @@ class PostsController extends Controller
         $post->public = false;
         if (Request::get('submit') == 'publish') {
             $this->validate(request(), [
-                'title' => 'required|string',
-                'body' => 'required|string',
-                'synopsis' => 'required|string',
+                'post_title' => 'required|string',
+                'post_body' => 'required|string',
+                'post_synopsis' => 'required|string',
             ]);
 
 
@@ -166,9 +176,9 @@ class PostsController extends Controller
             $post->save();
 
             $post = new Post();
-            $post->title = request('title');
-            $post->description = request('synopsis');
-            $post->article = request('body');
+            $post->title = request('post_title');
+            $post->description = request('post_synopsis');
+            $post->article = request('post_body');
             $post->status_id = Post::current;
             $post->public = true;
             $post->user_id = $user_id;
@@ -176,17 +186,17 @@ class PostsController extends Controller
             return Redirect::to('/posts/' . $post->id);
         } else if (Request::get('submit') == 'stash'){
             $this->validate(request(), [
-                'title' => 'required|string',
-                'body' => 'required|string',
-                'synopsis' => 'required|string',
+                'post_title' => 'required|string',
+                'post_body' => 'required|string',
+                'post_synopsis' => 'required|string',
             ]);
             $post->status_id = Post::updated;
             $post->save();
 
             $post = new Post();
-            $post->title = request('title');
-            $post->description = request('synopsis');
-            $post->article = request('body');
+            $post->title = request('post_title');
+            $post->description = request('post_synopsis');
+            $post->article = request('post_body');
             $post->status_id = Post::drafted;
             $post->public = false;
             $post->user_id = $user_id;
@@ -217,18 +227,5 @@ class PostsController extends Controller
         Session::flash('message', 'Successfully deleted the nerd!');
         return Redirect::to('/posts');*/
 
-    }
-    public function setlive()
-    {
-        $content = request('content');
-        $file = "test.blade.php";
-        $fp = fopen($file, 'w+');
-        fwrite($fp, $content);
-        fclose($fp);
-    }
-    public function getlive()
-    {
-        #return view('posts.test');
-        return File::get(public_path()."/test.blade.php");
     }
 }

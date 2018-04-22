@@ -39,9 +39,6 @@ Route::patch('/posts/{id}/update', ['as'=> 'posts.update', 'uses'=>'PostsControl
 Route::get('/posts', ['as'=>'posts.list', 'uses'=>'PostsController@list']);
 Route::get('/posts/stash', ['as'=>'posts.stash', 'uses'=>'PostsController@stash'])
     ->middleware('auth');
-// Live HTML
-Route::post('/livehtml', 'PostsController@setlive')->name('live.set');
-Route::get('/livehtml', 'PostsController@getlive')->name('live.get');
 //endregion
 
 //region Users Routes

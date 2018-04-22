@@ -1,21 +1,34 @@
 @extends('posts')
 
 @section('header_scripts')
+{{--    ****** Html Parsing for Post Previewing ******--}}
     <script type="text/javascript" src="{{ asset('js/ckeditor4/ckeditor.js') }}"></script>
 @endsection
 
 @section('footer_scripts')
     <script>
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
+        // ****** Html Parsing for Post Previewing ******
         CKEDITOR.replace( 'post_body' );
+
+
+        // ****** Data Dismissal Warning ******
+        $(window).on("beforeunload", function() {
+            return "Are you sure? You didn't finish the form!";
+        });
+
+        $(document).ready(function() {
+            $("#myForm").on("submit", function(e) {
+                $(window).off("beforeunload");
+                return true;
+            });
+        });
     </script>
 @endsection
 
 @section('content')
     <section class="jumbotron text-left">
         <div class="container">
-            {{ Form::model($post, ['id'=>'myForm','route' => ['posts.update', $post->id], 'method' => 'PATCH']) }}
+            {{ Form::model($post, ['id'=>'myForm','route' => [$route_name, $post->id], 'method' => $html_verb]) }}
                 {{csrf_field()}}
                 <div class="form-group">
                     {{ Form::label('post_title', 'Title') }}
@@ -42,20 +55,6 @@
                     </ul>
                 </div>
             @endif
-            <script>
-                $(window).on("beforeunload", function() {
-                    return "Are you sure? You didn't finish the form!";
-                });
-
-                $(document).ready(function() {
-                    $("#myForm").on("submit", function(e) {
-                        //check form to make sure it is kosher
-                        //remove the ev
-                        $(window).off("beforeunload");
-                        return true;
-                    });
-                });
-            </script>
         </div>
     </section>
 @endsection

@@ -95,7 +95,7 @@ class PostsController extends Controller
 
             $post->save();
 
-            return redirect('/posts/' . $post->id);
+            return redirect()->route('posts.show',[$post->id]);
         }
         else if (Request::get('submit')=='stash'){
             $this->validate(request(), [
@@ -113,11 +113,10 @@ class PostsController extends Controller
 
             $post->save();
 
-            return redirect('/posts');
-
+            return redirect()->route('posts.list');
         }
         else if (Request::get('submit')=='discard'){
-            return redirect('/posts');
+            return redirect()->route('posts.list');
         }
     }
 
@@ -134,7 +133,7 @@ class PostsController extends Controller
                 'post' => $post,
             ]);
         }
-        return redirect('/posts');
+        return redirect()->route('posts.list');
     }
 
     /**
@@ -183,7 +182,7 @@ class PostsController extends Controller
             $post->public = true;
             $post->user_id = $user_id;
             $post->save();
-            return Redirect::to('/posts/' . $post->id);
+            return redirect()->route('posts.show',[$post->id]);
         } else if (Request::get('submit') == 'stash'){
             $this->validate(request(), [
                 'post_title' => 'required|string',
@@ -201,12 +200,12 @@ class PostsController extends Controller
             $post->public = false;
             $post->user_id = $user_id;
             $post->save();
-            return Redirect::to('/posts/' . $post->id);
+            return redirect()->route('posts.show',[$post->id]);
 
         } else if(Request::get('submit')=='delete'){
             $post->status_id=Post::removed;
             $post->save();
-            return Redirect::to('/posts');
+            return redirect()->route('posts.list');
         }
     }
 

@@ -24,15 +24,17 @@
     </div>
     <div class="navbar navbar-inverse bg-inverse">
         <div class="row">
-            <div class="text-white col-sm-2 text-left">Skynet.How</div>
-            <div class="text-white col-sm-3">
-                <a href="/" class="navbar-brand">Home</a>
+            <div class="text-white col-sm-2 text-left">
+                <a href="{{ route('home') }}" class="navbar-brand">Skynet.How</a>
             </div>
             <div class="text-white col-sm-3">
-                <a href="/posts" class="navbar-brand">Blog</a>
+                <a href="{{ route('home') }}" class="navbar-brand">Home</a>
+            </div>
+            <div class="text-white col-sm-3">
+                <a href="{{ route('posts.list') }}" class="navbar-brand">Blog</a>
             </div>
             <div class="text-white col-sm-2">
-                <a href="/about" class="navbar-brand">About</a>
+                <a href="{{ route('about') }}" class="navbar-brand">About</a>
             </div>
             <div class="text-white col-sm-2 text-right">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">

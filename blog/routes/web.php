@@ -17,28 +17,28 @@ Route::get('/items/{item}', 'ItemsController@show');
 // endregion
 
 //region Posts Routes
-// Create
-Route::get('/create', ['as'=>'posts.create','uses'=>'PostsController@create'])
-    ->middleware('auth');
-Route::post('/posts', ['as'=>'posts.store','uses'=>'PostsController@store'])
-    ->middleware('auth');
-// Read
-Route::get('/posts/{post}', ['as'=>'post','uses'=>'PostsController@show'])
-    ->where('post','[0-9\-]+');
-// Update
-Route::get('/posts/{post}/edit', ['as'=>'posts.edit', 'uses'=>'PostsController@edit'])
-    ->where('post','[0-9\-]+')
-    ->middleware('auth');
-Route::patch('/posts/{id}/update', ['as'=> 'posts.update', 'uses'=>'PostsController@update'])
-    ->where('id','[0-9\-]+')
-    ->middleware('auth');
-// Delete
-// TODO: uncomment following line once users are enabled
-//Route::delete('/posts/{id}/delete', 'PostsController@destroy')->where('id','[0-9\-]+')->name('posts.delete')->middleware('auth');
-// List
-Route::get('/posts', ['as'=>'posts.list', 'uses'=>'PostsController@list']);
-Route::get('/posts/stash', ['as'=>'posts.stash', 'uses'=>'PostsController@stash'])
-    ->middleware('auth');
+Route::group(['prefix' => 'posts'], function () {
+    $c = 'PostsController@';
+    $n = 'posts.';
+    Route::middleware(['can:view,post'])->group(function () use ($c, $n) {
+        // Create
+        Route::get('/create', ['as'=>$n.'create','uses'=> $c.'create']);
+        Route::post('/', ['as'=>$n.'store','uses'=>$c.'store']);
+        Route::get('/stash', ['as'=>$n.'stash', 'uses'=>$c.'stash']);
+        // Update
+        Route::get('/{post}/edit', ['as'=>$n.'edit', 'uses'=>$c.'edit'])
+            ->where('post','[0-9\-]+');
+        Route::patch('/{id}/update', ['as'=>$n.'update', 'uses'=>$c.'update'])
+            ->where('id','[0-9\-]+');
+        // Delete
+        //Route::delete('/{id}/delete', $c.'destroy')->where('id','[0-9\-]+')->name('delete');
+    });
+    // Read
+    Route::get('/{post}', ['as'=>$n.'show','uses'=>$c.'show'])
+        ->where('post','[0-9\-]+');
+    // List
+    Route::get('/', ['as'=>$n.'list', 'uses'=>$c.'list']);
+});
 //endregion
 
 //region Users Routes
@@ -66,9 +66,9 @@ Route::get('logout', ['as'=>'logout','uses' => 'Auth\LoginController@doLogout'])
 // endregion
 
 // region Basic Routes
-Route::view('/about', 'main.about');
-Route::view('/', 'main.cover');
-Route::view('/test', 'test');
+Route::view('/about', 'main.about')->name('about');
+Route::view('/', 'main.cover')->name('home');
+Route::view('/test', 'test')->name('test');
 // endregion
 
 

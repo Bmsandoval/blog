@@ -10,7 +10,7 @@
                     </div>
                     @if(Auth::check())
                         <div class="col-sm-6 text-right">
-                            <a class="btn btn-default btn-sm" href="/posts/{{$post->id}}/edit">
+                            <a class="btn btn-default btn-sm" href="{{ route('posts.edit', [$post->id]) }}">
                                 <i class="fa fa-pencil"></i> Edit </a>
                         </div>
                     @endif

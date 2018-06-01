@@ -22,9 +22,9 @@
                             <div class="col-sm-5"></div>
                             <div class="col-sm-2">
                                 @if($stash)
-                                    <a href="/posts" class="btn btn-outline-success">View Posts</a>
+                                    <a href="{{ route('posts.list') }}" class="btn btn-outline-success">View Posts</a>
                                 @elseif(!$stash)
-                                    <a href="/posts/stash" class="btn btn-outline-warning">View Stash</a>
+                                    <a href="{{ route('posts.stash') }}" class="btn btn-outline-warning">View Stash</a>
                                 @endif
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                                     </h5>
                                 </div>
                                 </a>
-                                <a href="/posts/{{ $post->id }}" class="block-link" style="color:inherit">
+                                <a href="{{ route('posts.show', [$post->id]) }}" class="block-link" style="color:inherit">
                                 <div id="collapse_{{ $post->id }}" class="collapse" role="tabpanel" aria-labelledby="heading_{{ $post->id }}">
                                     <div class="card-block">
                                         <p class="card-text">{{ substr($post->description,0,120) }}</p>

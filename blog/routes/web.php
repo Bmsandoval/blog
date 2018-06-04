@@ -18,47 +18,67 @@ Route::get('/items/{item}', 'ItemsController@show');
 
 //region Posts Routes
 #Route::group(['prefix' => 'posts'], function () {
-Route::group([
-    'prefix' => 'posts',
-    ], function () {
-    $controller = 'PostsController@';
+Route::group(['prefix' => 'posts'], function () {
+    $ctrl = 'PostsController@';
     $name = 'posts.';
     $can = 'can:posts.';
     // Create
     Route::get('/create', [
         'as' => $name . 'create',
-        'uses' => $controller . 'create',
-        'middleware' => [$can . 'blog']
+        'uses' => $ctrl . 'create',
+        'middleware' => [$can . 'blog'],
     ]);
     Route::post('/store', [
         'as' => $name . 'store',
-        'uses' => $controller . 'store',
-        'middleware' => [$can . 'blog']
+        'uses' => $ctrl . 'store',
+        'middleware' => [$can . 'blog'],
     ]);
     // Read
     Route::get('/stash', [
         'as' => $name . 'stash',
-        'uses' => $controller . 'stash',
-        'middleware' => [$can . 'blog']
+        'uses' => $ctrl . 'stash',
+        'middleware' => [$can . 'blog'],
     ]);
     // Update
     Route::get('/edit/{post}', [
         'as' => $name . 'edit',
-        'uses' => $controller . 'edit',
-        'middleware' => [$can . 'blog']
-    ])->where('post', '[0-9\-]+');
-    Route::patch('/update/{id}', [
+        'uses' => $ctrl . 'edit',
+        'middleware' => [
+            $can . 'blog',
+            $can . 'edit,post'
+        ],
+    ]);
+    Route::put('/update/{post}', [
         'as' => $name . 'update',
-        'uses' => $controller . 'update',
-        'middleware' => [$can . 'blog']
-    ])->where('id', '[0-9\-]+');
-    // Delete
-    //Route::delete('/{id}/delete', $controller.'destroy')->where('id','[0-9\-]+')->name('delete');
+        'uses' => $ctrl . 'update',
+        'middleware' => [
+            $can . 'blog',
+            $can . 'edit,post'
+        ],
+    ]);
+    // (SOFT) Delete
+    Route::put('/delete/{post}', [
+        'as' => $name . 'hide',
+        'uses' => $ctrl . 'hide',
+        'middleware' => [
+            $can . 'blog',
+            $can . 'edit,post'
+        ],
+    ]);
+    // (HARD) Delete
+    Route::delete('/delete/{post}', [
+        'as' => $name . 'remove',
+        'uses' => $ctrl . 'remove',
+        'middleware' => [
+            $can . 'blog',
+            $can . 'delete,post'
+        ],
+    ]);
+
     // Read
-    Route::get('/read/{post}', ['as' => $name . 'show', 'uses' => $controller . 'show'])
-        ->where('post', '[0-9\-]+');
+    Route::get('/{post}', ['as' => $name . 'show', 'uses' => $ctrl . 'show']);
     // List
-    Route::get('/list', ['as' => $name . 'list', 'uses' => $controller . 'list']);
+    Route::get('/', ['as' => $name . 'list', 'uses' => $ctrl . 'list']);
 });
 //endregion
 

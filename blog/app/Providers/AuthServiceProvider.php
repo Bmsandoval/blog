@@ -25,11 +25,22 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        #Gate::define('blog', 'App\Policies\PostPolicy@canBlog');
+
+        Gate::before(function ($user, $ability) {
+            if ($user->hasRole('Admin')) {
+                return true;
+            }
+        });
+
         Gate::resource('posts', 'App\Policies\PostPolicy', [
             'blog' => 'canBlog',
+            'edit' => 'canEdit',
+            'delete' => 'canDelete',
         ]);
 
-        //
+        Gate::after(function ($user, $ability, $result, $arguments) {
+            // TODO : Enable logging
+        });
+
     }
 }

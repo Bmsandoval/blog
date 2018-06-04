@@ -145,7 +145,7 @@ class PostsController extends Controller
     public function edit(Post $post)
     {
         return view('posts.edit',[
-            'html_verb' => 'PATCH',
+            'html_verb' => 'PUT',
             'route_name' => 'posts.update',
             'post' => $post,
         ]);
@@ -158,9 +158,8 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Post $post)
     {
-        $post = Post::find($id);
         $user_id = $post->user_id;
         $post->public = false;
         if (Request::get('submit') == 'publish') {

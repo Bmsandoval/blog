@@ -15,7 +15,6 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Post::class => PostPolicy::class,
     ];
 
     /**
@@ -26,6 +25,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        #Gate::define('blog', 'App\Policies\PostPolicy@canBlog');
+        Gate::resource('posts', 'App\Policies\PostPolicy', [
+            'blog' => 'canBlog',
+        ]);
 
         //
     }
